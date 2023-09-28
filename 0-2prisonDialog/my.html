@@ -1,16 +1,40 @@
-<link rel="stylesheet" href="style.css">
-<script src="main.js"></script>
+<html>
+<script>
+  var num = 1;
 
-<div id=wrap>
-    <div class=imgBox style="width:800px;height:auto;">
-      <img class="img" src="./dialog/dialog1.png" alt="">
-      <img class="img" src="./dialog/dialog2.png" alt="">
-      <img class="img" src="./dialog/dialog3.png" alt="">
-      <img class="img" src="./dialog/dialog4.png" alt="">
-      <img class="img" src="./dialog/dialog5.png" alt="">
-      <img class="img" src="dialog/dialog6.png" alt="">
-    </div>
-    <div>
-        <button class="next"> 다음</button>
-    </div>
-  </div>
+function changePic(idx) {
+    if (idx) {
+        if (num == 6) return;
+        num++;
+    }
+    else {
+        if (num == 1) return;
+        num--;
+    }
+    var imgTag = document.getElementById("photo");
+    imgTag.setAttribute("src", "dialog/dialog" + num + ".png");
+    //console.log("zclick");
+}
+
+//UI가 노출될 위치(정렬, 가로, 세로) 값을 변수로 사전에 제작
+let postion = 'middle';
+let width = 900;
+let height = 580;
+
+// my.html로 state라는 태그를 만들어 hello라는 값을 전달
+let _widget = App.showWidget('my.html', position, width, height);
+</script>
+<link rel="stylesheet" href="slide.css">
+<script defer src="main.js"></script>
+
+<div class="slide">
+  <p>
+    <img src="dialog/dialog1.png" id="photo">
+  </p>
+  <p>
+    <button onclick="changePic(0);">❮</button>
+    <button onclick="changePic(1);">❯</button>
+  </p>
+</div>
+
+</html>
