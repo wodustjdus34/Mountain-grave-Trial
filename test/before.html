@@ -1,0 +1,31 @@
+<html>
+  <link rel="stylesheet" href="slide.css">
+<script>
+  var num = 1;
+
+function changePic(idx) {
+    if (idx) {
+        if (num == 6) return;
+        num++;
+    }
+    else {
+        if (num == 1) return;
+        num--;
+    }
+    var imgTag = document.getElementById("photo");
+    imgTag.setAttribute("src", "dialog/dialog" + num + ".png");
+    //console.log("zclick");
+}
+</script>
+
+<div class="slide">
+  <div id="dialog">
+    <img src="./dialog/dialog1.png" id="photo">
+  </div>
+  <div id="btn">
+    <button onclick="changePic(0);">❮</button>
+    <button onclick="changePic(1);">❯</button>
+  </div>
+</div>
+
+</html>
