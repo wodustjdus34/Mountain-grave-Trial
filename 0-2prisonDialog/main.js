@@ -1,10 +1,39 @@
-let _widget = null;
-
 App.onJoinPlayer.Add(function (player) {
-  // my.html로 state라는 태그를 만들어 hello라는 값을 전달
-    let _widget = App.showWidget('my.html', "top", 900, 800);
-  p._widget = App.showWidget('my.html', "top", 900, 800);
-  p.tag.widget = p.showWidget("widget.html", "sidebar", 350, 350);
+  player.tag = {
+		widget: null,
+	};
+
+  player.tag.widget = player.showWidget("my.html", "top", 900, 800);
+	player.tag.widget.onMessage.Add(function (player, msg) {
+		// 위젯에서 App으로 'type: close'라는 메시지를 보내면 위젯을 파괴함
+		if (msg.type == "close") {
+			player.showCenterLabel("감옥을 살펴보며 기다리자.");
+			player.tag.widget.destroy();
+			player.tag.widget = null;
+		}
+	});
+
+  // let widget = App.showWidget('my.html', "top", 900, 800);
+  // p.widget = App.showWidget('my.html', "top", 900, 800);
+  // player.tag.widget = player.showWidget("my.html", "top", 900, 800);
+  //TryInvokeInternal():233 - Jint.Runtime.JavaScriptException: Cannot read property 'widget' of null at :7:14
+
+	// player.tag.widget.onMessage.Add(function (player, data) {
+	// 	if (data.type == "close") {
+	// 		player.showCenterLabel("위젯이 닫혔습니다.");
+	// 		player.tag.widget.destroy();
+	// 		player.tag.widget = null;
+	// 	}
+	// });
+
+  player.tag.widget.onMessage.Add(function (player, msg) {
+		// 위젯에서 App으로 'type: close'라는 메시지를 보내면 위젯을 파괴함
+		if (msg.type == "close") {
+			player.showCenterLabel("위젯이 닫혔습니다.");
+			player.tag.widget.destroy();
+			player.tag.widget = null;
+		}
+	});
 
 });
 
