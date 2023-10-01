@@ -92,12 +92,22 @@
             prevButton.addEventListener('click', () => {
                 currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
                 showImage(currentImageIndex);
+                disableButtonsIfNeeded();
             });
 
             nextButton.addEventListener('click', () => {
                 currentImageIndex = (currentImageIndex + 1) % images.length;
                 showImage(currentImageIndex);
+                disableButtonsIfNeeded();
             });
+
+            // 이미지 배열의 길이 이상으로 버튼 클릭을 방지하는 함수
+            function disableButtonsIfNeeded() {
+            prevButton.disabled = currentImageIndex === 0;
+            nextButton.disabled = currentImageIndex === images.length - 1;
+        }
+
+        disableButtonsIfNeeded();
         </script>
     </body>
 </html>
