@@ -15,4 +15,18 @@ App.onJoinPlayer.Add(function(player){
   
   // 플레이어 속성이 변경되었으므로 호출해서 실제 반영해준다.
 	player.sendUpdated();
+
+    player.tag = {
+        widget: null,
+    };
+
+    player.tag.widget = player.showWidget("my.html", "top", 900, 800);
+    player.tag.widget.onMessage.Add(function (player, msg) {
+    // 위젯에서 App으로 'type: close'라는 메시지를 보내면 위젯을 파괴함
+        if (msg.type == "close") {
+        player.showCenterLabel("용모가 바뀌었으니 당당하게 시장에서 정보를 찾아보자.");
+        player.tag.widget.destroy();
+        player.tag.widget = null;
+        }
+    });
 })
