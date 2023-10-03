@@ -1,0 +1,123 @@
+<html style="overflow: hidden">
+	<head>
+		<style type="text/css">
+            .slide {
+                text-align: center;
+                width: 400px;
+                height: 280px;
+                margin-top: 0px;
+                /* background-color: aqua; */
+            }
+            
+            .btn {
+                text-align: bottom;
+            }
+
+            .closebtn {
+                margin-left: 200px;
+            }
+		</style>
+	</head>
+	<body>
+        <div class="slide">
+            <div id="dialog">
+                <img id="slider-image" src="" alt="이미지 슬라이더">
+            </div>
+            <div id="btn">
+                <button id="prev-button">❮</button>
+                <button id="next-button">❯</button>
+                <button id="closebtn" onclick="closeWidget()">X</button>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            function closeWidget() {
+				// App으로 메시지를 보냄.
+				window.parent.postMessage(
+					{
+						type: "close",
+					},
+					"*"
+				);
+			}
+            window.addEventListener("message", function (e) {
+				let image = e.data.image;
+				let text = e.data.text;
+				if (image) {
+					let content = document.getElementById("content");
+					if (content) {
+						while (content.hasChildNodes()) {
+							// 부모노드가
+							content.removeChild(content.firstChild);
+						}
+						let content_image = document.createElement("img");
+						content_image.setAttribute("src", image);
+						content_image.setAttribute("class", "cover");
+						content.append(content_image);
+					}
+				}
+				if (text) {
+					document.getElementById("text").innerText = text;
+				}
+			});
+
+            const images = [
+                ""
+                ,""
+                ,""
+                ,""
+                ,""
+                ,""
+                ,""
+                ,""
+                ,""
+                ,""
+                //10개
+                , ""
+                ,""
+                ,""
+                ,""
+                ,""
+                ,""
+                ,""
+                ,""
+                ,""
+                ,""
+                //20개
+            ];
+
+            const imageElement = document.getElementById('slider-image');
+            const prevButton = document.getElementById('prev-button');
+            const nextButton = document.getElementById('next-button');
+
+            let currentImageIndex = 0;
+
+            function showImage(index) {
+                imageElement.src = images[index];
+            }
+
+            showImage(currentImageIndex);
+
+            prevButton.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                showImage(currentImageIndex);
+                disableButtonsIfNeeded();
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                showImage(currentImageIndex);
+                disableButtonsIfNeeded();
+            });
+
+            // 이미지 배열의 길이 이상으로 버튼 클릭을 방지하는 함수
+            function disableButtonsIfNeeded() {
+            prevButton.disabled = currentImageIndex === 0;
+            nextButton.disabled = currentImageIndex === images.length - 1;
+        }
+
+        disableButtonsIfNeeded();
+        </script>
+    </body>
+</html>
