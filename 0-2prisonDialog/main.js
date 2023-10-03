@@ -14,7 +14,7 @@ App.onJoinPlayer.Add(function (player) {
 			player.tag.widget = null;
 		}
       });
-	}, 10000);
+	}, 11000);
 });
 
 //TryInvokeInternal():233 - Jint.Runtime.JavaScriptException: Cannot read property 'widget' of null at :6:14
