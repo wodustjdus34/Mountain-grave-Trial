@@ -24,7 +24,7 @@ App.onJoinPlayer.Add(function(player){
       player.tag.widget.onMessage.Add(function (player, msg) {
           // 위젯에서 App으로 'type: close'라는 메시지를 보내면 위젯을 파괴함
           if (msg.type == "close") {
-              //player.showCenterLabel("");
+              player.showCenterLabel("의자에 앉아서 생각하자. 위조문서의 허점을 찾아라!");
               player.tag.widget.destroy();
               player.tag.widget = null;
           }
