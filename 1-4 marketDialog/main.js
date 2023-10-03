@@ -15,7 +15,7 @@ App.onJoinPlayer.Add(function(player){
   
   // 플레이어 속성이 변경되었으므로 호출해서 실제 반영해준다.
 	player.sendUpdated();
-    
+
     player.tag = {
           widget: null,
       };
@@ -24,7 +24,7 @@ App.onJoinPlayer.Add(function(player){
       player.tag.widget.onMessage.Add(function (player, msg) {
           // 위젯에서 App으로 'type: close'라는 메시지를 보내면 위젯을 파괴함
           if (msg.type == "close") {
-              player.showCenterLabel("게시판에 진실을 밝히러 가자.");
+              player.showCenterLabel("억울한 사람은 규현인가? 현규인가? 게시판에 진실을 밝히러 가자.");
               player.tag.widget.destroy();
               player.tag.widget = null;
           }
