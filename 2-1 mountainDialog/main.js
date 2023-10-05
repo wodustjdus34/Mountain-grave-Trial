@@ -32,5 +32,5 @@ App.onJoinPlayer.Add(function(player){
               player.tag.widget = null;
           }
       });
-	}, 9000);  
+	}, 5500);  
   });
